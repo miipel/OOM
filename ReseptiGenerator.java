@@ -10,7 +10,7 @@ import com.google.java.contract.*;
  */
 @Invariant("resepti != null")
 public class ReseptiGenerator {
-	final static Resepti resepti = new Resepti();
+	final static Resepti resepti = new ReseptiToteutus();
 
 	/**
 	 * @param args

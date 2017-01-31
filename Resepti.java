@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import com.google.java.contract.*;
-
 /**
  * Pitää yllä listaa ReseptiRivi alkioista ja suorittaa alkioille pyydetyt
  * operaatiot.
@@ -8,38 +5,18 @@ import com.google.java.contract.*;
  * @author Miika Peltotalo
  *
  */
-@Invariant("alkiot.size() >= 1")
-public class Resepti {
-	private ArrayList<ReseptiRivi> alkiot = new ArrayList<>();
-
-	Resepti() {
-		//
-	}
+public interface Resepti {
 
 	/**
-	 * 
+	 * Lisää yhden rivin muokattuna reseptiin.
 	 * @param rivi
 	 */
-	@Requires({ "rivi != null", "!rivi.equals(\"\")" })
-	@Ensures("result == true")
-	public void lisaa(String rivi) {
-		rivi = rivi.trim();
-		ReseptiRivi rr = new ReseptiRivi();
-		rr.parse(rivi);
-		alkiot.add(rr);
-		;
-	}
+	void lisaa(String rivi);
 
 	/**
 	 * Tulostaa kaikki reseptirivit, mitä on syötetty.
 	 */
-	@Requires("alkiot != null")
-	public void tulosta() {
-		for (ReseptiRivi reseptiRivi : alkiot) {
-			reseptiRivi.tulosta(System.out);
-		}
-
-	}
+	void tulosta();
 
 	/**
 	 * Kutsuu aliluokan metodia jokaiselle reseptiRiville.
@@ -47,11 +24,6 @@ public class Resepti {
 	 * @param kerroin
 	 *            : määrä, jolla halutaa kertoa ainesosien lukumäärä.
 	 */
-	@Requires("kerroin > 0")
-	public void kerroAnnoskoolla(int kerroin) {
-		for (ReseptiRivi reseptiRivi : alkiot) {
-			reseptiRivi.kerroAnnoskoolla(kerroin);
-		}
-	}
+	void kerroAnnoskoolla(int kerroin);
 
 }
